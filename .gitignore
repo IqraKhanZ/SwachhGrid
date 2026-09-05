@@ -1,0 +1,30 @@
+# Node dependencies
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.vite/
+
+# Python virtual environment & caches
+__pycache__/
+backend/__pycache__/
+routers/__pycache__/
+services/__pycache__/
+*.pyc
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.production
+backend/.env
+frontend/.env
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+real_data_cache.json
