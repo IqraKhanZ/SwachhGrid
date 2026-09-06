@@ -256,8 +256,6 @@ async def login(body: LoginRequest):
 @router.post("/auth/google")
 async def google_login(body: GoogleTokenRequest):
     seed_demo_accounts()
-    if not GOOGLE_CLIENT_ID:
-        raise HTTPException(status_code=500, detail="GOOGLE_CLIENT_ID not configured on server")
 
     async with httpx.AsyncClient() as client:
         resp = await client.get(
@@ -270,7 +268,8 @@ async def google_login(body: GoogleTokenRequest):
 
     info = resp.json()
 
-    if info.get("aud") != GOOGLE_CLIENT_ID:
+    # Optional audience check if GOOGLE_CLIENT_ID is configured on backend
+    if GOOGLE_CLIENT_ID and info.get("aud") != GOOGLE_CLIENT_ID:
         raise HTTPException(status_code=401, detail="Token audience mismatch")
 
     google_email = info.get("email", "").lower()
