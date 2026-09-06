@@ -4,8 +4,13 @@ complaint_letter.py — Community Hero Green  (MongoDB version)
 
 import os
 import uuid
-import sendgrid
-from sendgrid.helpers.mail import Mail, Email, To, Content
+
+try:
+    import sendgrid
+    from sendgrid.helpers.mail import Mail, Email, To, Content
+    SENDGRID_AVAILABLE = True
+except ImportError:
+    SENDGRID_AVAILABLE = False
 from database import letters_col, issues_col, notifications_col
 from services.ai_service import generate_environmental_complaint_letter
 from datetime import datetime, timezone
@@ -24,7 +29,7 @@ def send_environmental_complaint_email(issue: dict) -> dict:
 
     delivery_status = "skipped_no_api_key"
     api_key = os.getenv("SENDGRID_API_KEY", "")
-    if api_key and api_key not in ("YOUR_SENDGRID_API_KEY", "skip"):
+    if SENDGRID_AVAILABLE and api_key and api_key not in ("YOUR_SENDGRID_API_KEY", "skip"):
         try:
             sg   = sendgrid.SendGridAPIClient(api_key=api_key)
             mail = Mail(

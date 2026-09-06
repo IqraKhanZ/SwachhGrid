@@ -9,3 +9,4 @@ requests==2.32.3
 python-dotenv==1.0.1
 pydantic[email]
 python-multipart==0.0.9
+sendgrid==6.11.0
