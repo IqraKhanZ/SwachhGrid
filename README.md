@@ -119,7 +119,8 @@ Open [http://localhost:5174](http://localhost:5174) in your browser.
 3. **Build Command**: `npm run build`
 4. **Output Directory**: `dist`
 5. **Environment Variables**:
-   - `VITE_API_URL`: `https://your-backend-app.onrender.com`
+   - `VITE_BACKEND_URL`: `https://swachhgrid-backend.onrender.com`
+   - `VITE_API_URL`: `https://swachhgrid-backend.onrender.com` (legacy support)
    - `VITE_GOOGLE_CLIENT_ID`: `your_google_oauth_client_id`
 
 ---

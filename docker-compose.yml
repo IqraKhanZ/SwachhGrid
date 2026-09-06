@@ -29,4 +29,4 @@ services:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - VITE_BACKEND_URL=http://localhost:8001
+      - VITE_BACKEND_URL=https://swachhgrid-backend.onrender.com

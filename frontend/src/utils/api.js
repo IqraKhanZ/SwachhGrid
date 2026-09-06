@@ -7,7 +7,10 @@
 
 import axios from 'axios';
 
-const BACKEND = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8001';
+const BACKEND =
+  import.meta.env.VITE_BACKEND_URL ||
+  import.meta.env.VITE_API_URL ||
+  'https://swachhgrid-backend.onrender.com';
 
 const api = axios.create({ baseURL: BACKEND });
 

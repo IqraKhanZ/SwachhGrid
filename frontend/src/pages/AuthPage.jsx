@@ -73,6 +73,14 @@ export default function AuthPage() {
     }
   };
 
+  const handleGoogleClick = () => {
+    if (GOOGLE_CLIENT_ID && window.google?.accounts?.id) {
+      window.google.accounts.id.prompt();
+    } else {
+      handleQuickLogin('iqrakhan30oct@gmail.com', 'citizen123');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -240,7 +248,7 @@ export default function AuthPage() {
             {(!GOOGLE_CLIENT_ID || googleLoading) && (
               <button
                 type="button"
-                onClick={() => handleQuickLogin('iqrakhan30oct@gmail.com', 'citizen123')}
+                onClick={handleGoogleClick}
                 disabled={googleLoading || loading}
                 className="w-full py-2.5 px-4 rounded-xl bg-surface border border-border hover:border-accent text-primary text-sm font-medium transition-all hover:bg-accent/5 flex items-center justify-center gap-3 shadow-sm"
               >

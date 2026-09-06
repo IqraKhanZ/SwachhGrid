@@ -149,13 +149,37 @@ def seed_demo_accounts():
             "verificationsCount": 2,
             "actionsJoined": 1,
             "createdAt": now,
+        },
+        {
+            "id": "000717c5-84d7-49b6-ac25-81800beeee2c",
+            "displayName": "Iqra Khan (Google User)",
+            "email": "iqrakhan30oct@gmail.com",
+            "passwordHash": _hash("citizen123"),
+            "role": "citizen",
+            "provider": "google",
+            "ecoPoints": 120,
+            "reputationPoints": 90,
+            "reportsCount": 5,
+            "verificationsCount": 4,
+            "actionsJoined": 2,
+            "createdAt": now,
         }
     ]
 
     for u in demo_users:
-        if not users_col().find_one({"email": u["email"]}):
+        existing = users_col().find_one({"email": u["email"]})
+        if not existing:
             users_col().insert_one(u)
             print(f"[auth] Seeded demo user: {u['email']} ({u['role']})")
+        else:
+            # Ensure existing user has passwordHash and role
+            update_data = {}
+            if not existing.get("passwordHash"):
+                update_data["passwordHash"] = u["passwordHash"]
+            if not existing.get("role"):
+                update_data["role"] = u["role"]
+            if update_data:
+                users_col().update_one({"email": u["email"]}, {"$set": update_data})
 
 
 # ── Auth dependency used by all protected routes ──────────────────────────────
