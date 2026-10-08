@@ -268,6 +268,49 @@ export default function IssueDetailPage() {
           </div>
         </div>
 
+        {/* AI-Generated Official Municipal Complaint Letter Card */}
+        <div className="card border-accent/30 bg-surface/80">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <div className="flex items-center gap-2">
+              <Mail className="w-5 h-5 text-accent" />
+              <h2 className="font-semibold text-primary">AI-Generated Official Municipal Complaint Letter</h2>
+            </div>
+            <span className="text-xs bg-accent/10 border border-accent/30 text-accent px-2.5 py-1 rounded-full font-medium">
+              ✉️ Dispatched to Municipal Cell
+            </span>
+          </div>
+          <p className="text-xs text-muted mb-3">
+            This legal-grade complaint letter was automatically drafted by LLaMA 3.2 Vision AI using visual telemetry and dispatched to <strong>{issue.department || "Municipal Sanitation Department"}</strong> ({issue.departmentEmail || "ward.officer@lmc.gov.in"}).
+          </p>
+          <div className="p-4 bg-bg rounded-xl border border-border font-mono text-xs text-primary/90 whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto">
+{issue.complaintLetterText || `OFFICIAL MUNICIPAL COMPLAINT LETTER
+Reference ID: ${issue.id || 'N/A'}
+Date: ${createdDate ? format(createdDate, 'dd MMMM yyyy') : 'Recent'}
+
+To,
+The Department Officer,
+${issue.department || 'Municipal Corporation Environmental Department'},
+${issue.assigned_ward ? `${issue.assigned_ward} Ward` : 'Lucknow Municipal Corporation'}
+
+SUBJECT: FORMAL GRIEVANCE REGARDING ${issue.environmental_category || issue.category || 'ENVIRONMENTAL ISSUE'} AT ${issue.location?.address || 'LUCKNOW'}
+
+Dear Sir/Madam,
+
+I am writing to formally log an environmental grievance regarding an urgent issue reported at ${issue.location?.address || 'Lucknow'}.
+
+ISSUE DETAILS:
+• Category: ${issue.environmental_category || issue.category || 'Solid Waste'}
+• Severity Level: ${issue.severity ? issue.severity.toUpperCase() : 'MEDIUM'}
+• Description: ${issue.description}
+• Impact Assessment: ${issue.environmental_impact || 'Accumulation of unmanaged waste poses immediate public health and environmental risks.'}
+
+Requesting immediate site inspection and remediation action by the assigned ward sanitation team within the 72-hour SLA guidelines.
+
+Sincerely,
+Eco-Citizen via SwachhGrid Automated Municipal Cell`}
+          </div>
+        </div>
+
         {/* Environmental Impact */}
         <div className="card border-accent/20 bg-accent/5">
           <div className="flex items-center gap-2 mb-3"><Leaf className="w-5 h-5 text-accent" /><h2 className="font-semibold text-accent">Environmental Impact</h2></div>
