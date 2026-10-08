@@ -28,3 +28,6 @@ frontend/.env
 .DS_Store
 Thumbs.db
 real_data_cache.json
+
+# Local specific files
+IBM_BOB_USAGE.md
